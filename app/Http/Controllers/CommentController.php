@@ -6,6 +6,9 @@ use App\Comment;
 use Illuminate\Http\Request;
 use Session;
 use Auth;
+use App\Post;
+use App\User;
+use App\Notifications\NotifyPostOwner;
 
 class CommentController extends Controller
 {
@@ -46,6 +49,9 @@ class CommentController extends Controller
             'comment' => $request->comment,
             'post_id' => $request->post_id
         ]);
+
+        $post = Post::find($request->post_id);
+        User::find($post->user->id)->notify(new NotifyPostOwner($post));
 
         Session::flash('status', 'Comment was successfully created');
         return redirect()->back();
