@@ -36,7 +36,8 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-                'cluster' => 'ap2'
+                'cluster' => 'ap2',
+                'encrypted' => true,
             ],
         ],
 

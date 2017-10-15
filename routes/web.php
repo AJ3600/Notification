@@ -17,10 +17,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::post('/post/store', 'PostController@store');
-Route::get('/post/{id}', 'PostController@show')->name('post.show');
+Route::post('/post/store', 'PostController@store')->middleware('auth');
+Route::get('/post/{id}', 'PostController@show')->name('post.show')->middleware('auth');
 
-Route::post('/comment/store', 'CommentController@store');
+Route::post('/comment/store', 'CommentController@store')->middleware('auth');
 
 Route::post('/notification/get', 'NotificationController@get');
 Route::post('/notification/read', 'NotificationController@read');

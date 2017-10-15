@@ -32,7 +32,7 @@ class NotifyPostOwner extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -45,6 +45,15 @@ class NotifyPostOwner extends Notification
     {
         return [
             'post' => $this->post
+        ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'data' => [
+                'post' => $this->post
+            ]
         ];
     }
 
